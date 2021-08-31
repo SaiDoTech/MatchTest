@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,20 +5,23 @@ public class FoundDeck : MonoBehaviour
 {
     private List<CardData> foundCards = new List<CardData>();
 
-    public void Add(CardData card)               // Добавить в список найленных
+    // Add to the list of found.
+    public void Add(CardData card)
     {
         foundCards.Add(card);
     }
 
-    public bool WasCardFound(CardData card)      // Проверить, была ли найдена карта
+    // Check if the card was found.
+    public bool WasCardFound(CardData card)
     {
         if (foundCards.Contains(card))
             return true;
         else
             return false;
-    } 
-    
-    public void Forget()                         // Очистить список найденных карт
+    }
+
+    // Clear the list of found cards.
+    public void Forget()
     {
         foundCards = new List<CardData>();       
     }

@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StarCannon : MonoBehaviour
 {
-    [SerializeField]
-    private ParticleSystem cannon;
+    [SerializeField] private ParticleSystem cannon;
 
-    [SerializeField]
-    private LevelCondition condition;
+    [SerializeField] private LevelCondition condition;
 
     private void Start()
     {

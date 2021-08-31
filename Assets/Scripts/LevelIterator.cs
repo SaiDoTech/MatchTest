@@ -4,17 +4,20 @@ using UnityEngine.Events;
 
 public class LevelIterator : MonoBehaviour
 {
-    [SerializeField]
-    private LevelData[] levels;
+    [SerializeField] private LevelData[] levels;
 
     private LevelData currentLvl;
 
     private const int startIndx = -1;
     private int currentIndx;
 
+    // First level loaded.
     private UnityEvent startEvent = new UnityEvent();
+    // Next level loaded.
     private UnityEvent<int> levelLoadedEvent = new UnityEvent<int>();
+    // Game session is finished.
     private UnityEvent finishEvent = new UnityEvent();
+    // Reset game session.
     private UnityEvent resetEvent = new UnityEvent();
 
     public void AddStartListener(UnityAction listener)
@@ -35,6 +38,7 @@ public class LevelIterator : MonoBehaviour
         resetEvent.AddListener(listener);
     }
 
+    // Load next level.
     public void LoadNext()
     {
         currentIndx++;
@@ -49,8 +53,9 @@ public class LevelIterator : MonoBehaviour
             finishEvent?.Invoke();
         }
 
-    }                                               // Загрузить следующий уровень
+    }
 
+    // Reset current game session.
     public void ResetLevel()
     {
         resetEvent.Invoke();
@@ -58,11 +63,12 @@ public class LevelIterator : MonoBehaviour
         currentIndx = startIndx;
         LoadNext();
         startEvent?.Invoke();
-    }                                             // Перезапустить игровой процесс
+    }
 
     private void Start()
     {
-        levels = levels.OrderBy(lvl => lvl.Indx).ToArray();                  // Отсортировать для загрузки
+        // Sort for loading.
+        levels = levels.OrderBy(lvl => lvl.Indx).ToArray();
 
         currentIndx = startIndx;
         LoadNext();

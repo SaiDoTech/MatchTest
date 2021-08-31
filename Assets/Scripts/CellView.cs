@@ -4,12 +4,14 @@ using UnityEngine.UI;
 
 public class CellView : MonoBehaviour
 {
-    private UnityEvent<GameObject> cellTappedEvent = new UnityEvent<GameObject>();        // Событие, срабатываемое при нажатии на ячейку
+    // Event triggered when clicking on a cell.
+    private UnityEvent<GameObject> cellTappedEvent = new UnityEvent<GameObject>();
 
-    private Card card;                                                                    // Карта, хранимая в ячейке
+    // Card stored in a cell.
+    private Card card;
 
-    [SerializeField]
-    private Image Background;                                                             // Задний фон ячейки
+    // Cell background.
+    [SerializeField] private Image Background;
 
     public void AddListener(UnityAction<GameObject> listener)
     {

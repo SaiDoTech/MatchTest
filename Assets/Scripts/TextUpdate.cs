@@ -3,17 +3,13 @@ using UnityEngine.UI;
 
 public class TextUpdate : MonoBehaviour
 {
-    [SerializeField]
-    private LevelIterator iterator;
+    [SerializeField] private LevelIterator iterator;
 
-    [SerializeField]
-    private Dispenser dispenser;
+    [SerializeField] private Dispenser dispenser;
 
-    [SerializeField]
-    private Text text;
+    [SerializeField] private Text text;
 
-    [SerializeField]
-    private string title = "Find";
+    [SerializeField] private string title = "Find";
 
     private void Awake()
     {

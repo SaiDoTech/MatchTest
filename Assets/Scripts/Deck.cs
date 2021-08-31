@@ -1,33 +1,42 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    [SerializeField]
-    private string bundlesPath = "Cards/Bundles";                        // Путь к набору карт (для упрощения процедуры вставки новых наборов)
+    // Path to the set of cards (to simplify the procedure for inserting new sets).
+    [SerializeField] private string bundlesPath = "Cards/Bundles";
 
-    [SerializeField]
-    private FoundDeck foundDeck;                                         // Список уже найденных карт
+    // List of already found cards.
+    [SerializeField] private FoundDeck foundDeck;
 
-    private CardBundleData[] cardBundles;                                // Загруженные наборы
-    private CardData[] currentBundle;                                    // Набор на текущем уровне
+    // Loaded bundles.
+    private CardBundleData[] cardBundles;
+    // Bundle on current level.
+    private CardData[] currentBundle;
     private int currentBudleIndx;
     private System.Random random;
 
-    private Dictionary<int, int> usedTimes = new Dictionary<int, int>(); // Количество карт, используемых из набора
+    // <BundleIndx, usedCount> (cards that have already been used).
+    private Dictionary<int, int> usedTimes = new Dictionary<int, int>();
 
-    public CardData GetNewCard()                                         // Получить карту для поиска
+    // Get a map to search.
+    public CardData GetNewCard()
     {
         SetNewDeck();
 
         if (currentBundle != null)
         {
-            if (usedTimes[currentBudleIndx] == currentBundle.Length)     // Если в выбранной колоде не осталось карт, которые ещё не играли - сбросить список
+            // If there are no cards left in the selected deck that have not yet been played, reset the list.
+            if (usedTimes[currentBudleIndx] == currentBundle.Length)
+            {
                 foundDeck.Forget();
+                usedTimes = new Dictionary<int, int>();
+            }
 
             var rndInx = random.Next(currentBundle.Length);
-            while (foundDeck.WasCardFound(currentBundle[rndInx]))        // Проверка, не выпадала ли она ранее
+
+            // Checking if it was dropped earlier.
+            while (foundDeck.WasCardFound(currentBundle[rndInx]))
                 rndInx = random.Next(currentBundle.Length);
 
             var cardToFind = currentBundle[rndInx];
@@ -40,7 +49,8 @@ public class Deck : MonoBehaviour
             return null;
     }
 
-    public CardData GetCard(CardData notThisCard)                        // Получить карту для размещения в таблице, отличную от искомой
+    // Get a card for placement in the table, different from the one you are looking for.
+    public CardData GetCard(CardData notThisCard)
     {
         if (currentBundle != null)
         {
@@ -59,7 +69,8 @@ public class Deck : MonoBehaviour
 
     private void Awake()
     {
-        cardBundles = Resources.LoadAll<CardBundleData>(bundlesPath);    // Достаточно переместить набор в указанную папку
+        // It is enough to move the bundle to the specified folder.
+        cardBundles = Resources.LoadAll<CardBundleData>(bundlesPath);
 
         for (int i = 0; i < cardBundles.Length; i++)
             usedTimes.Add(i, 0);
@@ -67,7 +78,8 @@ public class Deck : MonoBehaviour
         random = new System.Random();
     }
 
-    private void SetNewDeck()                                           // Получить новый набор карт
+    // Get new bundle.
+    private void SetNewDeck()
     {
         currentBudleIndx = random.Next(cardBundles.Length);
         currentBundle = cardBundles[currentBudleIndx].CardData;

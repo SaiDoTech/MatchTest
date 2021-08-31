@@ -4,17 +4,13 @@ using UnityEngine.Events;
 
 public class LevelCondition : MonoBehaviour
 {
-    [SerializeField]
-    private GridView grid;
+    [SerializeField] private GridView grid;
 
-    [SerializeField]
-    private Dispenser dispenser;
+    [SerializeField] private Dispenser dispenser;
 
-    [SerializeField]
-    private LevelIterator iterator;
+    [SerializeField] private LevelIterator iterator;
 
-    [SerializeField]
-    private float timeBetweenLvl = 1.0f;
+    [SerializeField] private float timeBetweenLvl = 1.0f;
 
     [SerializeField]
     private string positiveEffect = "PlayCardBounceAnim";                   // Эффект, который выполнится при выполнении условия уровня
@@ -29,15 +25,18 @@ public class LevelCondition : MonoBehaviour
         ConditionFulfilledEvent.AddListener(listener);
     }
 
-    public void CheckExecution(Card card)                                   // Проверка условия уровня 
+    // Check level condition.
+    public void CheckExecution(Card card)
     {
-        var needToFind = dispenser.NeedToFind().Title;                      // Получить искомую карту
+        // Get the card you are looking for.
+        var needToFind = dispenser.NeedToFind().Title;
         if (card.GetTitle() == needToFind)
         {
             card.gameObject.SendMessage(positiveEffect, timeBetweenLvl);
             ConditionFulfilledEvent?.Invoke();
 
-            StartCoroutine(MyWaitForSeconds(timeBetweenLvl));               // Подождать для отображения анимаций
+            // Wait for animations to display.
+            StartCoroutine(MyWaitForSeconds(timeBetweenLvl));
         }
         else
         {

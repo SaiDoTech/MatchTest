@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,21 +5,20 @@ public class GridView : MonoBehaviour
 {
     private UnityEvent<Card> cardSelectedEvent = new UnityEvent<Card>();
 
-    [SerializeField]
-    private LevelIterator iterator;
+    [SerializeField] private LevelIterator iterator;
 
-    [SerializeField]
-    private string startEffect = "PlayCellBounceAnim";                             // Ёффект, который сработает у всех €чеек при загрузке первого уровн€
+    [SerializeField] private string startEffect = "PlayCellBounceAnim";                             // Ёффект, который сработает у всех €чеек при загрузке первого уровн€
 
     public void AddListener(UnityAction<Card> listener)
     {
         cardSelectedEvent.AddListener(listener);
     }
 
+    // Get the cell that the user has selected.
     public void OnGridCellTapped(GameObject cell)
     {
         cardSelectedEvent?.Invoke(cell.GetComponent<Card>());
-    }                               // ѕолучить €чейку, которую выбрал пользователь
+    }
 
     private void Start()
     {

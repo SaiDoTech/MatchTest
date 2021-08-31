@@ -3,11 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CardData", menuName = "Data/New CardData")]
 public class CardData : ScriptableObject
 {
-    [SerializeField]
-    private string _title;                  // Значение карты (иуникальное в наборе)
+    // Value of the card (displayed as a search requirement).
+    [SerializeField] private string _title;
 
-    [SerializeField]
-    private Sprite _sprite;                 // Изображение для карты 
+    // Picture of a card.
+    [SerializeField] private Sprite _sprite;
 
     public string Title => this._title;
     public Sprite Sprite => this._sprite;

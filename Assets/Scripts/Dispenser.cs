@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dispenser : MonoBehaviour
 {
-    [SerializeField]
-    private Deck currentDeck;                       // Набор, играющий на данном уровне
+    // Set that plays at current level.
+    [SerializeField] private Deck currentDeck;
 
-    [SerializeField]
-    private LevelIterator iterator;
+    [SerializeField] private LevelIterator iterator;
 
-    private CardData needToFind;                    // Карта, которую необходимо найти
+    // Card to find.
+    private CardData needToFind;
 
     public CardData NeedToFind()
     {
@@ -24,6 +22,7 @@ public class Dispenser : MonoBehaviour
 
     private void OnLevelLoaded(int arg)
     {
-        needToFind = currentDeck.GetNewCard();      // Получить новую карту на каждом уровне
+        // Get a new card at each level.
+        needToFind = currentDeck.GetNewCard();
     }
 }

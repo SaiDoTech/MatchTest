@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RestartButton : MonoBehaviour
 {
-    [SerializeField]
-    private LevelIterator iterator;
+    [SerializeField] private LevelIterator iterator;
 
     private void Start()
     {

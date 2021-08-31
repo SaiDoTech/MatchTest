@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +5,7 @@ public class Card : MonoBehaviour
 {
     private CardData data;
 
-    [SerializeField]
-    private Image img;
+    [SerializeField] private Image img;
 
     public void Init(CardData data)
     {

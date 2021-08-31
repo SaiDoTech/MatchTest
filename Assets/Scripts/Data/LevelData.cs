@@ -3,14 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "Data/New LevelData")]
 public class LevelData : ScriptableObject
 {
-    [SerializeField]
-    private int _indx;             // Индекс для последовательности загрузки
+    // Index for boot sequence.
+    [SerializeField] private int _indx;
 
-    [SerializeField]
-    private string _title;         // Название уровня
- 
-    [SerializeField]
-    private int _cellsCount;       // Количество ячеек на уровне
+    // Level name.
+    [SerializeField] private string _title;
+
+    // Number of cells per level.
+    [SerializeField] private int _cellsCount;
 
     public int Indx => this._indx;
     public string Title => this._title;
