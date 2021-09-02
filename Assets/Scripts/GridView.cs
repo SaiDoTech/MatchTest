@@ -7,7 +7,8 @@ public class GridView : MonoBehaviour
 
     [SerializeField] private LevelIterator iterator;
 
-    [SerializeField] private string startEffect = "PlayCellBounceAnim";                             // Ёффект, который сработает у всех €чеек при загрузке первого уровн€
+    // Effect that works for all cells when loading the first level.
+    [SerializeField] private string startEffect = "PlayCellBounceAnim";
 
     public void AddListener(UnityAction<Card> listener)
     {

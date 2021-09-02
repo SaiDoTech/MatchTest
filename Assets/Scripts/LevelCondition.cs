@@ -12,11 +12,11 @@ public class LevelCondition : MonoBehaviour
 
     [SerializeField] private float timeBetweenLvl = 1.0f;
 
-    [SerializeField]
-    private string positiveEffect = "PlayCardBounceAnim";                   // Ёффект, который выполнитс€ при выполнении услови€ уровн€
+    // Effect that occurs when a level condition is met.
+    [SerializeField] private string positiveEffect = "PlayCardBounceAnim";
 
-    [SerializeField]
-    private string negativeEffect = "PlayCardShakeAnim";                    // Ёффект, который выполнитс€, если не пройти проверку
+    // Effect that will occur if the check fails.
+    [SerializeField] private string negativeEffect = "PlayCardShakeAnim";
 
     private UnityEvent ConditionFulfilledEvent = new UnityEvent();
 
@@ -29,8 +29,9 @@ public class LevelCondition : MonoBehaviour
     public void CheckExecution(Card card)
     {
         // Get the card you are looking for.
-        var needToFind = dispenser.NeedToFind().Title;
-        if (card.GetTitle() == needToFind)
+        var needToFind = dispenser.NeedToFind();
+
+        if (card.GetData().Equals(needToFind))
         {
             card.gameObject.SendMessage(positiveEffect, timeBetweenLvl);
             ConditionFulfilledEvent?.Invoke();

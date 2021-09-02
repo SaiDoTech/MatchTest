@@ -13,8 +13,8 @@ public class Card : MonoBehaviour
         img.sprite = data.Sprite;
     }
 
-    public string GetTitle()
+    public CardData GetData()
     {
-        return data.Title;
+        return data;
     }
 }
